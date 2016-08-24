@@ -1,0 +1,61 @@
+AllCops:
+  TargetRubyVersion: 2.3
+
+# gemspec is a special snowflake
+LineLength:
+  Exclude:
+    - cognito.gemspec
+  Max: 80
+
+ParameterLists:
+  Max: 3
+  CountKeywordArgs: true
+
+BlockNesting:
+  Max: 3
+
+CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    collect: 'map'
+    inject: 'reduce'
+    find: 'detect'
+    find_all: 'select'
+
+Documentation:
+  Enabled: false
+
+# Prefer String#% over Kernel#sprintf
+FormatString:
+  EnforcedStyle: percent
+
+# Align if/else blocks with the variable assignment
+EndAlignment:
+  AlignWith: variable
+
+# Prefer #kind_of? over #is_a?
+ClassCheck:
+  EnforcedStyle: kind_of?
+
+# Prefer
+#
+#     some_receiver
+#       .foo
+#       .bar
+#       .baz
+#
+# Over
+#
+#     some_receiver.foo
+#                  .bar
+#                  .baz
+MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# Align keys and values in a multiline hash
+AlignHash:
+  EnforcedColonStyle: table
+
+# Prefer `public_send` and `__send__` over `send`
+Send:
+  Enabled: true
