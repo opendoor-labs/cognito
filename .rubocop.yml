@@ -1,5 +1,6 @@
 AllCops:
   TargetRubyVersion: 2.3
+  DisplayCopNames: true
 
 # gemspec is a special snowflake
 LineLength:
@@ -25,10 +26,6 @@ CollectionMethods:
 Documentation:
   Enabled: false
 
-# Prefer String#% over Kernel#sprintf
-FormatString:
-  EnforcedStyle: percent
-
 # Align if/else blocks with the variable assignment
 EndAlignment:
   AlignWith: variable
@@ -51,10 +48,6 @@ ClassCheck:
 #                  .baz
 MultilineMethodCallIndentation:
   EnforcedStyle: indented
-
-# Align keys and values in a multiline hash
-AlignHash:
-  EnforcedColonStyle: table
 
 # Prefer `public_send` and `__send__` over `send`
 Send:
