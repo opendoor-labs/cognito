@@ -15,6 +15,9 @@ ParameterLists:
 BlockNesting:
   Max: 3
 
+BlockDelimiters:
+  EnforcedStyle: 'braces_for_chaining'
+
 CollectionMethods:
   Enabled: true
   PreferredMethods:
