@@ -3,10 +3,11 @@
 module FileHelper
   # Maps file names to relative file position
   FILES = {
-    profile: '/files/profile.json',
     identity_assessment: '/files/identity_assessment.json',
     identity_search: '/files/identity_search.json',
-    identity_search_job: '/files/identity_search_job.json'
+    identity_search_job: '/files/identity_search_job.json',
+    identity_search_job_completed: '/files/completed_identity_search_job.json',
+    profile: '/files/profile.json'
   }.freeze
 
   def self.read_file(name)
