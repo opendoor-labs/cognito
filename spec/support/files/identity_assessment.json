@@ -1,0 +1,271 @@
+{
+  "data": {
+    "type": "identity_assessment",
+    "id": "0eb416468439bb93d2fee39692f1ab31",
+    "attributes": {
+      "created_at": "2016-08-12 22:27:28 UTC",
+      "name": {
+        "first": "Ben",
+        "middle": null,
+        "last": "Wyatt"
+      },
+      "phone": {
+        "number": "+12223334444"
+      }
+    },
+    "relationships": {
+      "identity_search": {
+        "data": {
+          "type": "identity_search",
+          "id": "5fbc126b37afb1f1efb35252072da516"
+        }
+      },
+      "identity_record_comparisons": {
+        "data": [
+          {
+            "type": "identity_record_comparison",
+            "id": "c5a099c80bf3890039b17e27fad8f402"
+          },
+          {
+            "type": "identity_record_comparison",
+            "id": "b3cbf2e348d010604a51701f70cff264"
+          }
+        ]
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "identity_record_comparison",
+      "id": "c5a099c80bf3890039b17e27fad8f402",
+      "attributes": {
+        "score": 29
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        },
+        "phone_comparisons": {
+          "data": [
+            {
+              "type": "phone_comparison",
+              "id": "d9f97393f0c22590907bd95796e01144"
+            },
+            {
+              "type": "phone_comparison",
+              "id": "7fd5b5e6bdcc3973154e2d3b96b8103c"
+            }
+          ]
+        },
+        "name_comparisons": {
+          "data": [
+            {
+              "type": "name_comparison",
+              "id": "4a78edd5deb7f00944215b40ad3d638b"
+            },
+            {
+              "type": "name_comparison",
+              "id": "311517c72ff62f7ad7641367673dfaa2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "identity_record_comparison",
+      "id": "b3cbf2e348d010604a51701f70cff264",
+      "attributes": {
+        "score": 77
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "4555f2f4f38c0971f550f56b6cf80da3"
+          }
+        },
+        "phone_comparisons": {
+          "data": [
+            {
+              "type": "phone_comparison",
+              "id": "792837a12838430d93c50454ec3801a4"
+            }
+          ]
+        },
+        "name_comparisons": {
+          "data": [
+            {
+              "type": "name_comparison",
+              "id": "e77a3d08fe97f3081a47445d358193db"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "phone_comparison",
+      "id": "d9f97393f0c22590907bd95796e01144",
+      "attributes": {
+        "score": 27,
+        "components": {
+          "number": {
+            "input": "+12223334444",
+            "source": "+11236547890",
+            "score": 27
+          }
+        }
+      },
+      "relationships": {
+        "source_record": {
+          "data": {
+            "type": "phone",
+            "id": "b828a0a40a0261c297141999082a10c9"
+          }
+        }
+      }
+    },
+    {
+      "type": "phone_comparison",
+      "id": "7fd5b5e6bdcc3973154e2d3b96b8103c",
+      "attributes": {
+        "score": 18,
+        "components": {
+          "number": {
+            "input": "+12223334444",
+            "source": "+19876543212",
+            "score": 18
+          }
+        }
+      },
+      "relationships": {
+        "source_record": {
+          "data": {
+            "type": "phone",
+            "id": "3bbdfb3c0f1d842d478a0cc6a435a73a"
+          }
+        }
+      }
+    },
+    {
+      "type": "phone_comparison",
+      "id": "792837a12838430d93c50454ec3801a4",
+      "attributes": {
+        "score": 55,
+        "components": {
+          "number": {
+            "input": "+12223334444",
+            "source": "+11122334455",
+            "score": 55
+          }
+        }
+      },
+      "relationships": {
+        "source_record": {
+          "data": {
+            "type": "phone",
+            "id": "dc0a15b94133e267e5ad76060c2df23a"
+          }
+        }
+      }
+    },
+    {
+      "type": "name_comparison",
+      "id": "4a78edd5deb7f00944215b40ad3d638b",
+      "attributes": {
+        "score": 8,
+        "components": {
+          "first": {
+            "input": "Ben",
+            "source": "LESLIE",
+            "score": 17
+          },
+          "middle": {
+            "input": null,
+            "source": "BARBARA",
+            "score": null
+          },
+          "last": {
+            "input": "Wyatt",
+            "source": "KNOPE",
+            "score": 0
+          }
+        }
+      },
+      "relationships": {
+        "source_record": {
+          "data": {
+            "type": "partial_name",
+            "id": "3a6c5129b122084d52fe10941066d112"
+          }
+        }
+      }
+    },
+    {
+      "type": "name_comparison",
+      "id": "311517c72ff62f7ad7641367673dfaa2",
+      "attributes": {
+        "score": 31,
+        "components": {
+          "first": {
+            "input": "Ben",
+            "source": "LESLIE",
+            "score": 17
+          },
+          "middle": {
+            "input": null,
+            "source": null,
+            "score": null
+          },
+          "last": {
+            "input": "Wyatt",
+            "source": "KNOPE-WYATT",
+            "score": 45
+          }
+        }
+      },
+      "relationships": {
+        "source_record": {
+          "data": {
+            "type": "partial_name",
+            "id": "7e61e2a0f34b8239b10a4680a9eebff7"
+          }
+        }
+      }
+    },
+    {
+      "type": "name_comparison",
+      "id": "e77a3d08fe97f3081a47445d358193db",
+      "attributes": {
+        "score": 100,
+        "components": {
+          "first": {
+            "input": "Ben",
+            "source": "BEN",
+            "score": 100
+          },
+          "middle": {
+            "input": null,
+            "source": null,
+            "score": null
+          },
+          "last": {
+            "input": "Wyatt",
+            "source": "WYATT",
+            "score": 100
+          }
+        }
+      },
+      "relationships": {
+        "source_record": {
+          "data": {
+            "type": "partial_name",
+            "id": "116d0980276befb6731c7a2998b34f3e"
+          }
+        }
+      }
+    }
+  ]
+}
