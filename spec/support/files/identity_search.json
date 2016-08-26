@@ -1,0 +1,402 @@
+{
+  "data": {
+    "type": "identity_search",
+    "id": "5fbc126b37afb1f1efb35252072da516",
+    "attributes": {
+      "created_at": "2016-08-12T22:25:33Z",
+      "phone": {
+        "number": "+12223334444"
+      }
+    },
+    "relationships": {
+      "profile": {
+        "data": {
+          "type": "profile",
+          "id": "1c1820d38213f3aaf80c70a39f95b153"
+        }
+      },
+      "identity_records": {
+        "data": [
+          {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          },
+          {
+            "type": "identity_record",
+            "id": "4555f2f4f38c0971f550f56b6cf80da3"
+          }
+        ]
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "identity_record",
+      "id": "f8805258ffd68313541cd2529fa774d9",
+      "attributes": {},
+      "relationships": {
+        "addresses": {
+          "data": [
+            {
+              "type": "partial_address_us",
+              "id": "9db2ddb0ae321f3849b81abf91847c28"
+            }
+          ]
+        },
+        "dates_of_birth": {
+          "data": [
+            {
+              "type": "partial_date",
+              "id": "a8a28422d26805b2b2cb37a22692d5dd"
+            },
+            {
+              "type": "partial_date",
+              "id": "69e4997998836a58cc25eb01ab8b8f59"
+            }
+          ]
+        },
+        "dates_of_death": {
+          "data": [
+            {
+              "type": "partial_date",
+              "id": "ffc8b560b83c9830e14a3e99e960ce5f"
+            }
+          ]
+        },
+        "names": {
+          "data": [
+            {
+              "type": "partial_name",
+              "id": "3a6c5129b122084d52fe10941066d112"
+            },
+            {
+              "type": "partial_name",
+              "id": "7e61e2a0f34b8239b10a4680a9eebff7"
+            }
+          ]
+        },
+        "phones": {
+          "data": [
+            {
+              "type": "phone",
+              "id": "b828a0a40a0261c297141999082a10c9"
+            },
+            {
+              "type": "phone",
+              "id": "3bbdfb3c0f1d842d478a0cc6a435a73a"
+            }
+          ]
+        },
+        "ssns": {
+          "data": [
+            {
+              "type": "ssn",
+              "id": "10d0e9b62542f31c9e429723f97d52aa"
+            },
+            {
+              "type": "ssn",
+              "id": "321f2f3a5914b7cd239d72ab0e83bb2c"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "identity_record",
+      "id": "4555f2f4f38c0971f550f56b6cf80da3",
+      "attributes": {},
+      "relationships": {
+        "addresses": {
+          "data": [
+            {
+              "type": "partial_address_us",
+              "id": "81fe265d001d516fdbae5e8837a37e71"
+            }
+          ]
+        },
+        "dates_of_birth": {
+          "data": [
+            {
+              "type": "partial_date",
+              "id": "1f4880b07559bd22e1dd62b67040f2d3"
+            }
+          ]
+        },
+        "dates_of_death": {
+          "data": []
+        },
+        "names": {
+          "data": [
+            {
+              "type": "partial_name",
+              "id": "116d0980276befb6731c7a2998b34f3e"
+            }
+          ]
+        },
+        "phones": {
+          "data": [
+            {
+              "type": "phone",
+              "id": "dc0a15b94133e267e5ad76060c2df23a"
+            }
+          ]
+        },
+        "ssns": {
+          "data": [
+            {
+              "type": "ssn",
+              "id": "10bde6fbff5d23215e608fb4dd1e8a1b"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "partial_address_us",
+      "id": "9db2ddb0ae321f3849b81abf91847c28",
+      "attributes": {
+        "street": "123 MAIN ST",
+        "city": "PAWNEE",
+        "subdivision": "IN",
+        "postal_code": "46001",
+        "country_code": "US"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "partial_date",
+      "id": "a8a28422d26805b2b2cb37a22692d5dd",
+      "attributes": {
+        "year": 1975,
+        "month": 1,
+        "day": 18
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "partial_date",
+      "id": "69e4997998836a58cc25eb01ab8b8f59",
+      "attributes": {
+        "year": 1976,
+        "month": 1,
+        "day": 18
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "partial_date",
+      "id": "ffc8b560b83c9830e14a3e99e960ce5f",
+      "attributes": {
+        "year": 2015,
+        "month": 2,
+        "day": 24
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "partial_name",
+      "id": "3a6c5129b122084d52fe10941066d112",
+      "attributes": {
+        "first": "LESLIE",
+        "middle": "BARBARA",
+        "last": "KNOPE"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "partial_name",
+      "id": "7e61e2a0f34b8239b10a4680a9eebff7",
+      "attributes": {
+        "first": "LESLIE",
+        "middle": null,
+        "last": "KNOPE-WYATT"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "phone",
+      "id": "b828a0a40a0261c297141999082a10c9",
+      "attributes": {
+        "number": "+11236547890"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "phone",
+      "id": "3bbdfb3c0f1d842d478a0cc6a435a73a",
+      "attributes": {
+        "number": "+19876543212"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "ssn",
+      "id": "10d0e9b62542f31c9e429723f97d52aa",
+      "attributes": {
+        "number": "123456789"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "ssn",
+      "id": "321f2f3a5914b7cd239d72ab0e83bb2c",
+      "attributes": {
+        "number": "123456788"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "f8805258ffd68313541cd2529fa774d9"
+          }
+        }
+      }
+    },
+    {
+      "type": "partial_address_us",
+      "id": "81fe265d001d516fdbae5e8837a37e71",
+      "attributes": {
+        "street": "123 MAIN ST",
+        "city": "NEW YORK",
+        "subdivision": "NY",
+        "postal_code": "10001",
+        "country_code": "US"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "4555f2f4f38c0971f550f56b6cf80da3"
+          }
+        }
+      }
+    },
+    {
+      "type": "partial_date",
+      "id": "1f4880b07559bd22e1dd62b67040f2d3",
+      "attributes": {
+        "year": 1974,
+        "month": 11,
+        "day": 14
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "4555f2f4f38c0971f550f56b6cf80da3"
+          }
+        }
+      }
+    },
+    {
+      "type": "partial_name",
+      "id": "116d0980276befb6731c7a2998b34f3e",
+      "attributes": {
+        "first": "BEN",
+        "middle": null,
+        "last": "WYATT"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "4555f2f4f38c0971f550f56b6cf80da3"
+          }
+        }
+      }
+    },
+    {
+      "type": "phone",
+      "id": "dc0a15b94133e267e5ad76060c2df23a",
+      "attributes": {
+        "number": "+11122334455"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "4555f2f4f38c0971f550f56b6cf80da3"
+          }
+        }
+      }
+    },
+    {
+      "type": "ssn",
+      "id": "10bde6fbff5d23215e608fb4dd1e8a1b",
+      "attributes": {
+        "number": "987654321"
+      },
+      "relationships": {
+        "identity_record": {
+          "data": {
+            "type": "identity_record",
+            "id": "4555f2f4f38c0971f550f56b6cf80da3"
+          }
+        }
+      }
+    }
+  ]
+}
