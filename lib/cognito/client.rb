@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+
 module Cognito
   class Client
-    include HTTParty
-
-    class ResourceNotFound < StandardError; end
+    include HTTParty,
+            Responder
 
     # Default URI, can be override with Client#base_uri
     base_uri 'https://sandbox.cognitohq.com'
@@ -23,29 +23,16 @@ module Cognito
     end
 
     def create_profile!
-      response = post('/profiles', profile_params.to_json)
-
-      json = JSON.parse(response.body, symbolize_names: true)
-      Cognito::Resource::Profile.create(json)
+      response_from(post('/profiles', profile_params.to_json))
     end
 
     def search!(profile_id, phone_number)
       payload = search_params(profile_id, phone_number).to_json
-      response = post('/identity_searches', payload)
-
-      json = JSON.parse(response.body, symbolize_names: true)
-      if response.code == 201
-        Cognito::Resource::IdentitySearch.create(json)
-      elsif response.code == 202
-        Cognito::Resource::IdentitySearchJob.create(json)
-      end
+      response_from(post('/identity_searches', payload))
     end
 
     def search_status!(search_job_id)
-      response = get("/identity_searches/jobs/#{search_job_id}")
-
-      json = JSON.parse(response.body, symbolize_names: true)
-      Cognito::Resource::IdentitySearchJob.create(json)
+      response_from(get("/identity_searches/jobs/#{search_job_id}"))
     end
 
     def basic_auth(api_key)
@@ -67,7 +54,7 @@ module Cognito
     def profile_params
       {
         data: {
-          type: 'profile'
+          type: PROFILE
         }
       }
     end
@@ -76,7 +63,7 @@ module Cognito
     def search_params(profile_id, phone_number)
       {
         data: {
-          type: 'identity_search',
+          type: IDENTITY_SEARCH,
           attributes: {
             phone: {
               number: phone_number
@@ -85,7 +72,7 @@ module Cognito
           relationships: {
             profile: {
               data: {
-                type: 'profile',
+                type: PROFILE,
                 id:   profile_id
               }
             }
