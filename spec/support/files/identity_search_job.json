@@ -1,0 +1,14 @@
+{
+  "data": {
+    "type": "identity_search_job",
+    "id": "foi2uoiaf",
+    "attributes": {
+      "created_at": "2016-07-18T21:24:18.00Z",
+      "updated_at": "2016-07-18T21:24:18.00Z",
+      "status": "processing"
+    },
+    "relationships": {
+      "identity_search": null
+    }
+  }
+}
