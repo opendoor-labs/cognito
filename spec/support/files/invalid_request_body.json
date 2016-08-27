@@ -1,0 +1,11 @@
+{
+  "errors": [
+    {
+      "title": "Invalid Request Body",
+      "detail": "data.type must be equal to profile.",
+      "source": {
+        "pointer": "/data/type"
+      }
+    }
+  ]
+}

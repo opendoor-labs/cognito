@@ -22,8 +22,7 @@ module Cognito
     }.freeze
 
     def build(json)
-      klass = klass_mapper(json.dig(:data, :type))
-      klass.create(json)
+      klass_mapper(json.dig(:data, :type)).create(json)
     end
 
     def klass_mapper(type)
@@ -31,7 +30,17 @@ module Cognito
     end
 
     def parse_response(response)
-      JSON.parse(response.body, symbolize_names: true)
+      json = JSON.parse(response.body, symbolize_names: true)
+      (response.code < 400) ? json : handle_errors(json, response.code)
+    end
+
+    def handle_errors(json, code)
+      klass = (code < 500) ? ClientError : ServerError
+      format_error(klass, json[:errors].first)
+    end
+
+    def format_error(klass, error)
+      raise klass, error[:detail]
     end
   end
 end

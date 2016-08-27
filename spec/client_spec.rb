@@ -62,6 +62,23 @@ RSpec.describe Cognito::Client do
       expect(profile.id).to eq(response_json[:data][:id])
       expect(profile.attributes).to eq(response_json[:data][:attributes])
     end
+
+    context 'when 4xx error' do
+      let(:response_body) { FileHelper.read_file(:not_found) }
+      let(:response) { response_struct.new(response_body, 404) }
+
+      it 'raises a ClientError' do
+        expect(client.class).to receive(:post)
+          .with('/profiles', options)
+          .and_return(response)
+        expect(Cognito::Resource::Profile).not_to receive(:create)
+
+        expect {
+          client.create_profile!
+        }.to raise_exception(Cognito::ClientError,
+                             'The requested resource could not be found.')
+      end
+    end
   end
 
   describe '#search!' do
@@ -137,6 +154,22 @@ RSpec.describe Cognito::Client do
         expect(response.attributes[:identity_search]).to eq(nil)
       end
     end
+
+    context 'when 4xx error' do
+      let(:response_body) { FileHelper.read_file(:invalid_request_body) }
+      let(:response) { response_struct.new(response_body, 400) }
+
+      it 'raises a ClientError' do
+        expect(client.class).to receive(:post)
+          .with('/identity_searches', options)
+          .and_return(response)
+        expect(Cognito::Resource::IdentitySearch).not_to receive(:create)
+
+        expect {
+          client.search!(profile.id, phone_number)
+        }.to raise_exception(Cognito::ClientError)
+      end
+    end
   end
 
   describe '#search_status!' do
@@ -178,6 +211,22 @@ RSpec.describe Cognito::Client do
 
         # Ensure the object is well-formed.
         expect(search_job.attributes[:status]).to eq('processing')
+      end
+    end
+
+    context 'when 4xx error' do
+      let(:response_body) { FileHelper.read_file(:invalid_request_body) }
+      let(:response) { response_struct.new(response_body, 400) }
+
+      it 'raises a ClientError' do
+        expect(client.class).to receive(:get)
+          .with("/identity_searches/jobs/#{job_id}", options)
+          .and_return(response)
+        expect(Cognito::Resource::IdentitySearchJob).not_to receive(:create)
+
+        expect {
+          client.search_status!(job_id)
+        }.to raise_exception(Cognito::ClientError)
       end
     end
   end
