@@ -7,6 +7,8 @@ module FileHelper
     identity_search: '/files/identity_search.json',
     identity_search_job: '/files/identity_search_job.json',
     identity_search_job_completed: '/files/completed_identity_search_job.json',
+    invalid_request_body: '/files/invalid_request_body.json',
+    not_found: '/files/not_found.json',
     profile: '/files/profile.json'
   }.freeze
 
