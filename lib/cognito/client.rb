@@ -5,13 +5,15 @@ module Cognito
     include HTTParty,
             Responder
 
-    # Default URI, can be override with Client#base_uri
-    base_uri 'https://sandbox.cognitohq.com'
-
+    URI = 'https://sandbox.cognitohq.com'.freeze
+    JSON_HEADER = 'application/vnd.api+json'.freeze
     HEADERS = {
-      'Accept' => 'application/vnd.api+json',
-      'Content-Type' => 'application/vnd.api+json'
+      'Accept' => JSON_HEADER,
+      'Content-Type' => JSON_HEADER
     }.freeze
+
+    # Default URI, can be override with Client#base_uri
+    base_uri URI
 
     def initialize(api_key:)
       basic_auth(api_key)
