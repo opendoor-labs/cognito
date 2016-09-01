@@ -11,7 +11,8 @@ RSpec.describe Cognito::Client do
   let(:headers) do
     {
       'Accept' => 'application/vnd.api+json',
-      'Content-Type' => 'application/vnd.api+json'
+      'Content-Type' => 'application/vnd.api+json',
+      'Cognito-Version' => '2016-09-01'
     }
   end
 

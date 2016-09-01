@@ -7,9 +7,11 @@ module Cognito
 
     URI = 'https://sandbox.cognitohq.com'.freeze
     JSON_HEADER = 'application/vnd.api+json'.freeze
+    COGNITO_VERSION = '2016-09-01'.freeze
     HEADERS = {
       'Accept' => JSON_HEADER,
-      'Content-Type' => JSON_HEADER
+      'Content-Type' => JSON_HEADER,
+      'Cognito-Version' => COGNITO_VERSION,
     }.freeze
 
     # Default URI, can be override with Client#base_uri
