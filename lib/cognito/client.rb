@@ -5,20 +5,14 @@ module Cognito
     include HTTParty,
             Responder
 
-    URI = 'https://sandbox.cognitohq.com'.freeze
-    JSON_HEADER = 'application/vnd.api+json'.freeze
-    COGNITO_VERSION = '2016-09-01'.freeze
-    HEADERS = {
-      'Accept' => JSON_HEADER,
-      'Content-Type' => JSON_HEADER,
-      'Cognito-Version' => COGNITO_VERSION,
-    }.freeze
+    URI = 'https://sandbox.cognitohq.com'
 
     # Default URI, can be override with Client#base_uri
     base_uri URI
 
-    def initialize(api_key:)
-      basic_auth(api_key)
+    def initialize(api_key:, api_secret:)
+      @api_key = api_key
+      @api_secret = api_secret
     end
 
     def base_uri=(uri)
@@ -38,21 +32,30 @@ module Cognito
       get("/identity_searches/jobs/#{search_job_id}")
     end
 
-    def basic_auth(api_key)
-      self.class.basic_auth(api_key, '')
-    end
-
     protected
 
     def get(path)
-      response_from(self.class.get(path, headers: HEADERS))
+      headers = notarize_request('get', path, '').headers
+      response_from(self.class.get(path, headers: headers))
     end
 
     def post(path, payload)
-      response_from(self.class.post(path, headers: HEADERS, body: payload))
+      headers = notarize_request('post', path, payload).headers
+      response_from(self.class.post(path, headers: headers, body: payload))
     end
 
     private
+
+    def notarize_request(verb, path, body)
+      target = "#{verb} #{path}"
+
+      Notary.new(
+        api_key: @api_key,
+        api_secret: @api_secret,
+        target: target,
+        body: body
+      )
+    end
 
     def profile_params
       {

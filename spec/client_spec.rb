@@ -1,17 +1,52 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+
 require 'httparty'
 require 'json'
+require 'openssl'
 
 RSpec.describe Cognito::Client do
+  def sign(secret, string)
+    Base64.strict_encode64(
+      OpenSSL::HMAC.digest(
+        OpenSSL::Digest::SHA256.new, secret, string
+      )
+    )
+  end
+
   let(:api_key) { 'abc123' }
-  let(:client) { described_class.new(api_key: api_key) }
+  let(:api_secret) { 'foobar' }
+  let(:client) { described_class.new(api_key: api_key, api_secret: api_secret) }
   let(:response_struct) { Struct.new(:body, :code) }
+  let(:date) { Time.now.httpdate }
+  let(:digest) do
+    body = JSON.generate(expected_json)
+    "SHA-256=#{Base64.strict_encode64(Digest::SHA256.digest(body))}"
+  end
+  let(:signing_string) do
+    [
+      "date: #{date}",
+      "digest: #{digest}",
+      "(request-target): #{target}"
+    ].join("\n")
+  end
+  let(:signature) { sign(api_secret, signing_string) }
+  let(:authorization) do
+    [
+      'Signature keyId="' + api_key + '"',
+      'algorithm="hmac-sha256"',
+      'headers="date digest (request-target)"',
+      'signature="' + signature + '"'
+    ].join(',')
+  end
   let(:headers) do
     {
-      'Accept' => 'application/vnd.api+json',
+      'Date' => date,
+      'Digest' => digest,
+      'Authorization' => authorization,
       'Content-Type' => 'application/vnd.api+json',
+      'Accept' => 'application/vnd.api+json',
       'Cognito-Version' => '2016-09-01'
     }
   end
@@ -19,15 +54,22 @@ RSpec.describe Cognito::Client do
   let(:response) { response_struct.new(response_body, 201) }
   let(:options) { { headers: headers, body: JSON.generate(expected_json) } }
 
+  # Freeze time so our headers are correct.
+  around do |ex|
+    Timecop.freeze(DateTime.now) { ex.run }
+  end
+
   describe '#initialize' do
     it 'requires an :api_key' do
       expect {
-        described_class.new
+        described_class.new(api_secret: api_secret)
       }.to raise_exception(ArgumentError, 'missing keyword: api_key')
+    end
 
+    it 'requires an :api_secret' do
       expect {
         described_class.new(api_key: api_key)
-      }.not_to raise_exception
+      }.to raise_exception(ArgumentError, 'missing keyword: api_secret')
     end
   end
 
@@ -49,6 +91,7 @@ RSpec.describe Cognito::Client do
     let(:expected_json) do
       { data: { type: 'profile' } }
     end
+    let(:target) { 'post /profiles' }
 
     it 'makes the correct API call' do
       expect(client.class).to receive(:post)
@@ -109,6 +152,7 @@ RSpec.describe Cognito::Client do
         }
       }
     end
+    let(:target) { 'post /identity_searches' }
 
     it 'makes the correct API call' do
       expect(client.class).to receive(:post)
@@ -176,6 +220,11 @@ RSpec.describe Cognito::Client do
   describe '#search_status!' do
     let(:options) { { headers: headers } }
     let(:job_id) { 'foi2uoiaf' }
+    let(:expected_json) { '' }
+    let(:digest) do
+      "SHA-256=#{Base64.strict_encode64(Digest::SHA256.digest(''))}"
+    end
+    let(:target) { "get /identity_searches/jobs/#{job_id}" }
 
     context 'when the search has completed' do
       let(:response_body) do
