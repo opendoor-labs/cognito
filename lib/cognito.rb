@@ -2,7 +2,11 @@
 
 require 'bundler/setup'
 
+require 'base64'
+require 'digest'
 require 'json'
+require 'openssl'
+require 'time'
 
 require 'abstract_type'
 require 'adamantium'
@@ -21,6 +25,7 @@ require 'cognito/resource/identity_assessment'
 require 'cognito/constants'
 require 'cognito/error'
 require 'cognito/version'
+require 'cognito/notary'
 
 require 'cognito/responder'
 require 'cognito/client'
