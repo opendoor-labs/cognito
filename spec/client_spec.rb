@@ -60,6 +60,9 @@ RSpec.describe Cognito::Client do
   end
 
   describe '#initialize' do
+    let(:uri) { 'api.cognitohq.com' }
+    let(:normalized_uri) { HTTParty.normalize_base_uri(uri) }
+
     it 'requires an :api_key' do
       expect {
         described_class.new(api_secret: api_secret)
@@ -71,6 +74,16 @@ RSpec.describe Cognito::Client do
         described_class.new(api_key: api_key)
       }.to raise_exception(ArgumentError, 'missing keyword: api_secret')
     end
+
+    it 'accepts :base_uri as optional argument' do
+      client = described_class.new(
+        api_key: api_key,
+        api_secret: api_secret,
+        base_uri: uri
+      )
+
+      expect(client.class.base_uri).to eq(normalized_uri)
+    end
   end
 
   describe '#base_uri=' do
@@ -81,7 +94,7 @@ RSpec.describe Cognito::Client do
       client.base_uri = uri
 
       # Unable to test this behavior without violating encapsulation.
-      expect(client.class.default_options[:base_uri]).to eq(normalized_uri)
+      expect(client.class.base_uri).to eq(normalized_uri)
     end
   end
 
