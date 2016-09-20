@@ -10,9 +10,19 @@ module Cognito
     # Default URI, can be override with Client#base_uri
     base_uri URI
 
-    def initialize(api_key:, api_secret:)
-      @api_key = api_key
-      @api_secret = api_secret
+    # Don't follow redirects.
+    no_follow true
+    follow_redirects false
+
+    def initialize(options = {})
+      @errors = []
+      @api_key = options.fetch(:api_key) { @errors << :api_key }
+      @api_secret = options.fetch(:api_secret) { @errors << :api_secret }
+      self.base_uri = options.fetch(:base_uri) { URI }
+
+      if @errors.any?
+        raise ArgumentError, "missing keyword: #{@errors.join(',')}"
+      end
     end
 
     def base_uri=(uri)
@@ -30,6 +40,10 @@ module Cognito
 
     def search_status!(search_job_id)
       get("/identity_searches/jobs/#{search_job_id}")
+    end
+
+    def retrieve_search(search_id)
+      get("/identity_searches/#{search_id}")
     end
 
     protected
