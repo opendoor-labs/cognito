@@ -4,12 +4,21 @@ require 'json'
 
 module Cognito
   module Responder
+    DEFAULT_WHITELIST = %w(
+      identity_record
+      partial_date
+      partial_address_us
+      partial_name
+      phone
+      ssn
+    ).freeze
+
     def included(base)
       base.include InstanceMethods
     end
 
-    def response_from(response)
-      build(parse_response(response))
+    def response_from(response, options = {})
+      build(parse_response(response, options))
     end
 
     private
@@ -29,9 +38,14 @@ module Cognito
       MAPPER.fetch(type) { raise ServerError, 'malformed JSON response' }
     end
 
-    def parse_response(response)
+    def parse_response(response, options = {})
       json = JSON.parse(response.body, symbolize_names: true)
-      (response.code < 400) ? json : handle_errors(json, response.code)
+      if response.code < 400
+        whitelist = options.fetch(:permit, DEFAULT_WHITELIST).map(&:to_s)
+        Cleaner.new(json, whitelist).call
+      else
+        handle_errors(json, response.code)
+      end
     end
 
     def handle_errors(json, code)
