@@ -22,6 +22,7 @@ require 'cognito/resource/identity_search'
 require 'cognito/resource/identity_search_job'
 require 'cognito/resource/identity_assessment'
 
+require 'cognito/cleaner'
 require 'cognito/constants'
 require 'cognito/error'
 require 'cognito/version'
