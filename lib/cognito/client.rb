@@ -33,29 +33,29 @@ module Cognito
       post('/profiles', profile_params.to_json)
     end
 
-    def search!(profile_id, phone_number)
+    def search!(profile_id, phone_number, options = {})
       payload = search_params(profile_id, phone_number).to_json
-      post('/identity_searches', payload)
+      post('/identity_searches', payload, options)
     end
 
-    def search_status!(search_job_id)
-      get("/identity_searches/jobs/#{search_job_id}")
+    def search_status!(search_job_id, options = {})
+      get("/identity_searches/jobs/#{search_job_id}", options)
     end
 
-    def retrieve_search(search_id)
-      get("/identity_searches/#{search_id}")
+    def retrieve_search(search_id, options = {})
+      get("/identity_searches/#{search_id}", options)
     end
 
     protected
 
-    def get(path)
+    def get(path, options = {})
       headers = notarize_request('get', path, '').headers
-      response_from(self.class.get(path, headers: headers))
+      response_from(self.class.get(path, headers: headers), options)
     end
 
-    def post(path, payload)
+    def post(path, payload, options = {})
       headers = notarize_request('post', path, payload).headers
-      response_from(self.class.post(path, headers: headers, body: payload))
+      response_from(self.class.post(path, headers: headers, body: payload), options)
     end
 
     private

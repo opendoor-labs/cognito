@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'pry'
 
 require 'httparty'
 require 'json'
@@ -175,6 +176,24 @@ RSpec.describe Cognito::Client do
         .and_call_original
 
       client.search!(profile.id, phone_number)
+    end
+
+    context 'when it uses the :permit option' do
+      let(:permitted) { %w(identity_record phone partial_name) }
+
+      it 'excludes the unspecified fields' do
+        expect(client.class).to receive(:post)
+          .with('/identity_searches', options)
+          .and_return(response)
+        expect(Cognito::Resource::IdentitySearch).to receive(:create)
+          .and_call_original
+
+        result = client.search!(profile.id, phone_number, permit: permitted)
+
+        result.included.each do |record|
+          expect(permitted).to include(record[:type])
+        end
+      end
     end
 
     context 'when response is 201' do
