@@ -208,7 +208,7 @@ RSpec.describe Cognito::Client do
 
         # Ensure the object is well-formed.
         expect(response.type).to eq('identity_search')
-        expect(response.attributes.dig(:phone, :number)).to eq(phone_number)
+        expect(response.attributes.fetch(:phone).fetch(:number)).to eq(phone_number)
       end
     end
 
