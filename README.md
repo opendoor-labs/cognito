@@ -1,6 +1,6 @@
-# Cognito
+# Cognito Client
 
-Ruby client for the BlockScore Cognito API.
+Unofficial Ruby client for the BlockScore Cognito API.
 
 Frankenstein of demo code supplied by BlockScore, and our own stuff. `client.rb` is ours,
 everything else is theirs. The BlockScore code basically just handles the structuring
@@ -13,23 +13,19 @@ Currently in the "make it work" phase of development.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'cognito'
+gem 'cognito', git: 'https://github.com/opendoor-labs/cognito.git'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install cognito
-
 ## Usage
 
 Create a client
 
 ```ruby
-client = Cognito::Client.new(api_key: 'SOME_API_KEY')
+client = Cognito::Client.new(api_key: 'API_KEY', api_secret: 'API_SECRET')
 
 # default base URI is https://sandbox.cognitohq.com
 #
@@ -50,11 +46,6 @@ profile = client.create_profile!
 
 search = client.search!(profile.id, '+14151231234')
 ```
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/cognito.
-
 
 ## License
 
