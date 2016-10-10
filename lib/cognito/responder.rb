@@ -31,7 +31,7 @@ module Cognito
     }.freeze
 
     def build(json)
-      klass_mapper(json.dig(:data, :type)).create(json)
+      klass_mapper(json.fetch(:data).fetch(:type)).create(json)
     end
 
     def klass_mapper(type)
