@@ -67,6 +67,10 @@ module Cognito
       parent.included
     end
 
+    def initialize(relationships: nil, **options)
+      super
+    end
+
     protected
 
     def resolve(identifier)
@@ -81,12 +85,9 @@ module Cognito
     end
 
     def relationship_data(key)
-      relation =
-        relationships.fetch(key) do
-          raise MissingRelation.new(key, self)
-        end
+      fail MissingRelation.new(key, self) unless relationships && relationships.key?(key)
 
-      relation.fetch(:data)
+      relationships.fetch(key).fetch(:data)
     end
 
     class Registry
@@ -112,12 +113,12 @@ module Cognito
 
       def lookup(type)
         registry.fetch(type) do
-          raise MissingError, type
+          fail MissingError, type
         end
       end
 
       def add(type, resource_class)
-        raise DuplicateTypeError, type if registry.key?(type)
+        fail DuplicateTypeError, type if registry.key?(type)
 
         registry[type] = resource_class
       end
