@@ -19,8 +19,8 @@ module Cognito
       many :dates_of_death
     end
 
-    class PartialAddressUS < self
-      register_type :partial_address_us
+    class USAddress < self
+      register_type :us_address
 
       attribute :street
       attribute :city
@@ -28,8 +28,8 @@ module Cognito
       attribute :postal_code
     end
 
-    class PartialName < self
-      register_type :partial_name
+    class Name < self
+      register_type :name
 
       attribute :first
       attribute :middle
@@ -48,8 +48,16 @@ module Cognito
       attribute :number
     end
 
-    class PartialDate < self
-      register_type :partial_date
+    class Birth < self
+      register_type :birth
+
+      attribute :day
+      attribute :month
+      attribute :year
+    end
+
+    class Death < self
+      register_type :death
 
       attribute :day
       attribute :month
