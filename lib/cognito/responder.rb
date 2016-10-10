@@ -6,9 +6,10 @@ module Cognito
   module Responder
     DEFAULT_WHITELIST = %w(
       identity_record
-      partial_date
-      partial_address_us
-      partial_name
+      birth
+      death
+      us_address
+      name
       phone
       ssn
     ).freeze

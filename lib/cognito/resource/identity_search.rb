@@ -15,12 +15,12 @@ module Cognito
       many :names
       many :ssns
       many :phones
-      many :dates_of_birth
-      many :dates_of_death
+      many :births
+      many :deaths
     end
 
-    class PartialAddressUS < self
-      register_type :partial_address_us
+    class USAddress < self
+      register_type :us_address
 
       attribute :street
       attribute :city
@@ -29,7 +29,7 @@ module Cognito
     end
 
     class PartialName < self
-      register_type :partial_name
+      register_type :name
 
       attribute :first
       attribute :middle
@@ -44,16 +44,20 @@ module Cognito
 
     class Phone < self
       register_type :phone
-
-      attribute :number
     end
 
     class PartialDate < self
-      register_type :partial_date
-
       attribute :day
       attribute :month
       attribute :year
+    end
+
+    class Birth < PartialDate
+      register_type :birth
+    end
+
+    class Death < PartialDate
+      register_type :death
     end
   end
 end
