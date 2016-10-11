@@ -3,17 +3,10 @@
 module Cognito
   # Signs Cognito requests.
   class Notary
+    include Anima.new(:api_key, :api_secret, :body, :target)
+
     CONTENT_TYPE = ACCEPT_TYPE = 'application/vnd.api+json'
     COGNITO_VERSION = '2016-09-01'
-
-    attr_reader :api_key, :api_secret, :body, :target
-
-    def initialize(api_key:, api_secret:, body:, target:)
-      @api_key = api_key
-      @api_secret = api_secret
-      @body = body
-      @target = target
-    end
 
     def headers
       @headers ||= {
