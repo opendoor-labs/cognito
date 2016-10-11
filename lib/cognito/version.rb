@@ -1,4 +1,4 @@
 # frozen_string_literal: true
-module Cognito
-  VERSION = '0.4.1'
-end
+class Cognito
+  VERSION = '0.5.0'
+end # Cognito

@@ -21,16 +21,14 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.11'
   spec.add_development_dependency 'pry', '~> 0.10'
-  spec.add_development_dependency 'rake', '~> 11.2'
-  spec.add_development_dependency 'rspec', '~> 3.5'
-  spec.add_development_dependency 'rubocop', '~> 0.41'
-  spec.add_development_dependency 'timecop', '~> 0.8'
-  spec.add_development_dependency 'rspec-its', '~> 1.2.0'
 
   spec.add_dependency 'abstract_type', '~> 0.0.7'
   spec.add_dependency 'adamantium', '~> 0.2.0'
   spec.add_dependency 'anima', '~> 0.3.0'
   spec.add_dependency 'concord', '~> 0.1.5'
-  spec.add_dependency 'httparty', '~> 0.13'
   spec.add_dependency 'procto', '~> 0.0.3'
+  spec.add_dependency 'ice_nine', '~> 0.11.2'
+
+  spec.add_runtime_dependency 'http', '~> 2.0', '>= 2.0.3'
+  spec.add_runtime_dependency 'addressable', '~> 2.4', '>= 2.4.0'
 end

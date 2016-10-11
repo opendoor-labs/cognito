@@ -1,0 +1,91 @@
+---
+require:
+  - rubocop-rspec
+  - rubocop/devtools
+inherit_gem:
+  rubocop-devtools: config/default.yml
+AllCops:
+  Exclude:
+  - vendor/**/*
+  - db/migrate/*
+  DisplayCopNames: true
+  TargetRubyVersion: 2.3
+# This ends up being too spammy
+Style/Documentation:
+  Enabled: false
+Style/ExtraSpacing:
+  AllowForAlignment: true
+Metrics/LineLength:
+  Max: 100
+Style/IfUnlessModifier:
+  MaxLineLength: 100
+Style/Next:
+  EnforcedStyle: always
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '[]'
+    '%I': '[]'
+    '%q': '{}'
+    '%Q': '{}'
+    '%r': '{}'
+    '%s': ()
+    '%w': '[]'
+    '%W': '[]'
+    '%x': ()
+Style/TrivialAccessors:
+  ExactNameMatch: false
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+Style/SymbolArray:
+  Enabled: true
+Style/BarePercentLiterals:
+  EnforcedStyle: percent_q
+Style/CollectionMethods:
+  Enabled: true
+Style/Send:
+  Enabled: true
+Style/AutoResourceCleanup:
+  Enabled: true
+Style/FirstArrayElementLineBreak:
+  Enabled: true
+Style/FirstHashElementLineBreak:
+  Enabled: true
+Style/FirstMethodArgumentLineBreak:
+  Enabled: true
+Style/FirstMethodParameterLineBreak:
+  Enabled: true
+Style/MultilineArrayBraceLayout:
+  Enabled: true
+Style/MultilineAssignmentLayout:
+  EnforcedStyle: new_line
+  Enabled: true
+Style/MultilineHashBraceLayout:
+  Enabled: true
+Style/MultilineMethodCallBraceLayout:
+  Enabled: true
+Style/MultilineMethodDefinitionBraceLayout:
+  Enabled: true
+Style/OptionHash:
+  Enabled: true
+Style/StringMethods:
+  Enabled: true
+Style/IndentArray:
+  EnforcedStyle: consistent
+Style/IndentHash:
+  EnforcedStyle: consistent
+MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+Style/AlignHash:
+  EnforcedColonStyle: table
+Style/SignalException:
+  EnforcedStyle: semantic
+Style/SingleLineBlockParams:
+  Enabled: false
+RSpec/DescribeClass:
+  Exclude: []
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/VerifiedDoubles:
+  IgnoreSymbolicNames: true

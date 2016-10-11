@@ -1,104 +1,67 @@
 # frozen_string_literal: true
+require 'bundler/setup'
 
-module Cognito
+require 'concord'
+require 'anima'
+require 'procto'
+require 'adamantium'
+require 'abstract_type'
+require 'http'
+require 'addressable'
+require 'openssl'
+require 'base64'
+
+require 'cognito/client/connection'
+require 'cognito/client/request'
+require 'cognito/client/document'
+require 'cognito/client/resource_identifier'
+
+# resources
+require 'cognito/client/resource'
+require 'cognito/client/resource/profile'
+require 'cognito/client/resource/identity_search'
+require 'cognito/client/resource/identity_search_job'
+require 'cognito/client/resource/identity_assessment'
+
+# responses
+require 'cognito/client/response'
+require 'cognito/client/response/builder'
+require 'cognito/client/response/profile'
+require 'cognito/client/response/identity_assessment'
+require 'cognito/client/response/identity_search'
+require 'cognito/client/response/identity_search_job'
+
+# params
+require 'cognito/client/params'
+require 'cognito/client/params/omitted'
+require 'cognito/client/params/identity'
+require 'cognito/client/params/identity_assessment'
+require 'cognito/client/params/identity_search'
+
+# commands
+require 'cognito/client/command'
+require 'cognito/client/commands/mixins/create_behavior'
+require 'cognito/client/commands/create_profile'
+require 'cognito/client/commands/create_identity'
+require 'cognito/client/commands/create_identity_assessment'
+require 'cognito/client/commands/create_identity_search'
+require 'cognito/client/commands/retrieve_identity_search_job'
+require 'cognito/client/commands/retrieve_identity_location'
+
+class Cognito
   class Client
-    include HTTParty,
-            Responder
+    include Concord.new(:server)
 
-    URI = 'https://sandbox.cognitohq.com'
-
-    # Default URI, can be override with Client#base_uri
-    base_uri URI
-
-    # Don't follow redirects.
-    no_follow true
-    follow_redirects false
-
-    def initialize(options = {})
-      @errors = []
-      @api_key = options.fetch(:api_key) { @errors << :api_key }
-      @api_secret = options.fetch(:api_secret) { @errors << :api_secret }
-      self.base_uri = options.fetch(:base_uri) { URI }
-
-      if @errors.any?
-        raise ArgumentError, "missing keyword: #{@errors.join(',')}"
-      end
+    def self.create(**connection_params)
+      new(Connection.parse(**connection_params))
     end
 
-    def base_uri=(uri)
-      self.class.base_uri(uri)
+    def create_profile
+      Command::CreateProfile.call(server)
     end
 
-    def create_profile!
-      post('/profiles', profile_params.to_json)
+    def create_identity_search(**params)
+      Command::CreateIdentitySearch.call(params.merge(connection: server))
     end
-
-    def search!(profile_id, phone_number, options = {})
-      payload = search_params(profile_id, phone_number).to_json
-      post('/identity_searches', payload, options)
-    end
-
-    def search_status!(search_job_id, options = {})
-      get("/identity_searches/jobs/#{search_job_id}", options)
-    end
-
-    def retrieve_search(search_id, options = {})
-      get("/identity_searches/#{search_id}", options)
-    end
-
-    protected
-
-    def get(path, options = {})
-      headers = notarize_request('get', path, '').headers
-      response_from(self.class.get(path, headers: headers), options)
-    end
-
-    def post(path, payload, options = {})
-      headers = notarize_request('post', path, payload).headers
-      response_from(self.class.post(path, headers: headers, body: payload), options)
-    end
-
-    private
-
-    def notarize_request(verb, path, body)
-      target = "#{verb} #{path}"
-
-      Notary.new(
-        api_key: @api_key,
-        api_secret: @api_secret,
-        target: target,
-        body: body
-      )
-    end
-
-    def profile_params
-      {
-        data: {
-          type: PROFILE
-        }
-      }
-    end
-
-    # rubocop:disable Metrics/MethodLength
-    def search_params(profile_id, phone_number)
-      {
-        data: {
-          type: IDENTITY_SEARCH,
-          attributes: {
-            phone: {
-              number: phone_number
-            }
-          },
-          relationships: {
-            profile: {
-              data: {
-                type: PROFILE,
-                id:   profile_id
-              }
-            }
-          }
-        }
-      }
-    end
-  end
-end
+  end # Client
+end # Cognito
