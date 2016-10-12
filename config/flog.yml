@@ -1,5 +1,4 @@
 ---
 threshold: 17.8
 lib_dirs:
-  - -lib/cog/client/request.rb  # Uses squiggly heredoc
   - lib
