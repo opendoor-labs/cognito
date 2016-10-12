@@ -1,7 +1,8 @@
 ---
-machine:
-  ruby:
-    version: '2.3.1'
+dependencies:
+  override:
+    - ./circleci.sh build
 test:
   override:
-    - bundle exec rake ci
+    - ./circleci.sh spec:
+        parallel: true

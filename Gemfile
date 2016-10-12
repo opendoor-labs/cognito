@@ -11,12 +11,6 @@ group(:tools) do
   # Rspec integration for mutant
   gem 'mutant-rspec', '~> 0.8.8'
 
-  # Watches file system and invokes commands according to mapping rules
-  gem 'guard',        '~> 2.14.0'
-
-  # Plugin to guard for RSpec tooling
-  gem 'guard-rspec',  '~> 4.7.2'
-
   # A metagem wrapping development tools:
   #   procto,
   #   adamantium,
