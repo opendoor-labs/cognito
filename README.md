@@ -13,7 +13,7 @@ Currently in the "make it work" phase of development.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'cognito', git: 'https://github.com/opendoor-labs/cognito.git'
+gem 'cognito-client', require: 'cognito'
 ```
 
 And then execute:
