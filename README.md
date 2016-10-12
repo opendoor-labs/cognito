@@ -1,12 +1,6 @@
 # Cognito Client
 
-Unofficial Ruby client for the BlockScore Cognito API.
-
-Frankenstein of demo code supplied by BlockScore, and our own stuff. `client.rb` is ours,
-everything else is theirs. The BlockScore code basically just handles the structuring
-of their data models.
-
-Currently in the "make it work" phase of development.
+Unofficial Ruby client for the BlockScore Cognito API. This library was designed using a [command-query separation principle](https://en.wikipedia.org/wiki/Command–query_separation).
 
 ## Installation
 
@@ -22,29 +16,72 @@ And then execute:
 
 ## Usage
 
-Create a client
+### Creating a client
 
 ```ruby
-client = Cognito::Client.new(api_key: 'API_KEY', api_secret: 'API_SECRET')
-
-# default base URI is https://sandbox.cognitohq.com
-#
-# to set a different API:
-client.base_uri('SOME_NEW_BASE_URI')
+client = Cognito::Client.create(
+  api_key:     'your-api-key',
+  api_secret:  'your-api-secret',
+  uri:         'https://sandbox.cognitohq.com',
+  api_version: '2016-09-01'
+)
 ```
 
-Create a Profile:
+### Creating a profile
 
 ```ruby
-profile = client.create_profile!
+profile = client.create_profile
 ```
 
-Initiate a search against a phone number:
+### Create an identity search with phone and name
 
 ```ruby
-profile = client.create_profile!
+search = client.create_identity_search(
+  profile_id:   profile.data.id,
+  phone_number: '+14151231234',
+  name: { # optional
+    first: 'Leslie',
+    last:  'Knope'
+  }
+)
+```
 
-search = client.search!(profile.id, '+14151231234')
+### Creating an identity assessment for the search
+
+```ruby
+assessment = search.create_assessment(
+  phone_number: '+14151231234',
+  name: {
+    first: 'Leslie',
+    last:  'Doe'
+  }
+)
+```
+
+### Traversing the data
+
+The client automatically links the resource relationships allowing you to make calls like:
+
+```ruby
+search.data.identity_records.first.names.map(&:attributes)
+
+# [
+#   { :first=>"LESLIE", :middle=>"BARBARA", :last=>"KNOPE" },
+#   {:first=>"LESLIE", :middle=>nil, :last=>"KNOPE-WYATT" }
+# ]
+
+```
+
+## Running the test suite
+
+```
+bundle exec rspec
+```
+
+## Running the CI tasks
+
+```
+bundle exec rake ci
 ```
 
 ## License

@@ -1,0 +1,6 @@
+name: cognito/client
+namespace: Cognito
+since: HEAD~1
+ignore_subjects:
+  - 'Cognito::Client::Document#resolve'
+expect_coverage: 1/1
