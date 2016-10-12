@@ -5,12 +5,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'cognito/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'cognito'
+  spec.name          = 'cognito-client'
   spec.version       = Cognito::VERSION
   spec.authors       = ['Connor Jacobsen']
   spec.email         = ['connor@opendoor.com']
 
-  spec.summary       = 'Ruby client for the BlockScore Cognito API'
+  spec.summary       = 'Unofficial Ruby client for the BlockScore Cognito API'
   spec.homepage      = 'https://github.com/opendoor-labs/cognito'
   spec.license       = 'MIT'
 
