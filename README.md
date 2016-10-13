@@ -7,12 +7,18 @@ Unofficial Ruby client for the BlockScore Cognito API. This library was designed
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'cognito-client', require: 'cognito'
+gem 'cognito-client'
 ```
 
 And then execute:
 
     $ bundle
+
+In your code or in IRB you can include the library with:
+
+```
+require 'cognito/client'
+```
 
 ## Usage
 
