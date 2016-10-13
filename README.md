@@ -1,4 +1,4 @@
-# Cognito Client
+# Cognito Client [![CircleCI](https://circleci.com/gh/opendoor-labs/cognito.svg?style=shield)](https://circleci.com/gh/opendoor-labs/cognito)
 
 Unofficial Ruby client for the BlockScore Cognito API. This library was designed using a [command-query separation principle](https://en.wikipedia.org/wiki/Command–query_separation).
 
