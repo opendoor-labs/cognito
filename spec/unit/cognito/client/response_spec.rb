@@ -11,7 +11,7 @@ RSpec.describe Cognito::Client::Response do
       headers:    headers,
       data:       nil,
       connection: connection,
-      json: ''
+      json:       ''
     )
   end
 
