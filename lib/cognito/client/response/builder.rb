@@ -10,7 +10,8 @@ class Cognito
           {
             status:  build_status,
             headers: response.headers.to_hash,
-            data:    build_data
+            data:    build_data,
+            json:    response.body.to_s
           }
         end
 

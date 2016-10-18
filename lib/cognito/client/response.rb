@@ -3,7 +3,7 @@
 class Cognito
   class Client
     class Response
-      include Anima.new(:status, :headers, :data, :connection)
+      include Anima.new(:status, :headers, :data, :json, :connection)
 
       def self.build(response, connection)
         new(Builder.call(response).merge(connection: connection))
