@@ -11,7 +11,7 @@ class Cognito
                   ' for resource: %p'
 
         def initialize(key, resource)
-          super(format(MESSAGE, *[key, resource]))
+          super(format(MESSAGE, key, resource))
         end
       end # MissingRelation
 

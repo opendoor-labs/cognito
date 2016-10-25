@@ -11,7 +11,7 @@ class Cognito
             status:  build_status,
             headers: response.headers.to_hash,
             data:    build_data,
-            json:    response.body.to_s
+            json:    json_body
           }
         end
 
@@ -21,6 +21,12 @@ class Cognito
           return if response.body.empty?
 
           resource_class.build(document.data, document)
+        end
+
+        def json_body
+          return if response.body.empty?
+
+          JSON.parse(response)
         end
 
         def build_status
