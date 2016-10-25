@@ -11,7 +11,7 @@ RSpec.describe Cognito::Client::Response do
       headers:    headers,
       data:       nil,
       connection: connection,
-      json:       ''
+      json:       nil
     )
   end
 
@@ -60,7 +60,7 @@ RSpec.describe Cognito::Client::Response do
       is_expected.to eql(
         created_response.with(
           data: Cognito::Client::Resource::Profile.build(document.data, document),
-          json: body
+          json: JSON.parse(body)
         )
       )
     end
