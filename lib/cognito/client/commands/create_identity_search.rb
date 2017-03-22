@@ -5,7 +5,7 @@ class Cognito
       class CreateIdentitySearch < CreateIdentity
         include Mixins::CreateBehavior, anima.add(:profile_id)
 
-        private :profile_id, :name, :phone_number
+        private :profile_id, :name, :phone_number, :ssn, :birth
 
         ENDPOINT = '/identity_searches'
 
@@ -15,7 +15,9 @@ class Cognito
           Params::IdentitySearch.call(
             profile_id:   profile_id,
             name:         name,
-            phone_number: phone_number
+            phone_number: phone_number,
+            ssn:          ssn,
+            birth:        birth
           )
         end
 
