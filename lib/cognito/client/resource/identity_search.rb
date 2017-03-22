@@ -26,6 +26,8 @@ class Cognito
         attribute :city
         attribute :subdivision
         attribute :postal_code
+        attribute :country_code
+        attribute :usage
       end # USAddress
 
       class PartialName < self
@@ -40,6 +42,9 @@ class Cognito
         register_type :ssn
 
         attribute :number
+        attribute :area
+        attribute :group
+        attribute :serial
       end # SSN
 
       class Phone < self
