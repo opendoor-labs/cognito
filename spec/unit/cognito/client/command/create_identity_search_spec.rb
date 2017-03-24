@@ -80,9 +80,73 @@ RSpec.describe Cognito::Client::Command::CreateIdentitySearch do
     end
   end
 
+  context 'when name, phone, dob, ssn are provided' do
+    let(:request) do
+      Cognito::Client::Request.post(
+        '/identity_searches',
+        data: {
+          type:          'identity_search',
+          attributes:    {
+            phone: {
+              number: '+12223334444'
+            },
+            name:  {
+              first:  'Delmer',
+              middle: 'Loves',
+              last:   'Pokemon'
+            },
+            ssn:   {
+              area:   '123',
+              group:  '45',
+              serial: '6789'
+            },
+            birth: {
+              day:   23,
+              month: 8,
+              year:  1993
+            }
+          },
+          relationships: {
+            profile: {
+              data: {
+                type: 'profile',
+                id:   'oi13uaiof2qoi'
+              }
+            }
+          }
+        }
+      )
+    end
+
+    it 'passes phone, name, dob, ssn along to the attributes object' do
+      described_class.call(
+        connection:   connection,
+        profile_id:   'oi13uaiof2qoi',
+        phone_number: '+12223334444',
+        name:         {
+          first:  'Delmer',
+          middle: 'Loves',
+          last:   'Pokemon'
+        },
+        ssn:          {
+          area:   '123',
+          group:  '45',
+          serial: '6789'
+        },
+        birth:        {
+          day:   23,
+          month: 8,
+          year:  1993
+        }
+      )
+
+      expect(connection).to have_received(:run).with(request)
+    end
+  end
+
   context 'when request is ACCEPTED 202' do
     let(:headers) do
-      { 'Content-Location': '/identity_searches/jobs/o3irufoai3o' }
+      { 'Content-Location' => '/identity_searches/jobs/o3irufoai3o' }
     end
 
     it 'returns a processing identity response' do

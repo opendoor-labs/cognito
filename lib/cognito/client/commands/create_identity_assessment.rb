@@ -13,7 +13,9 @@ class Cognito
           Params::IdentityAssessment.call(
             identity_search_identifier: identity_search_identifier,
             name:                       name,
-            phone_number:               phone_number
+            phone_number:               phone_number,
+            ssn:                        ssn,
+            birth:                      birth
           )
         end
 
