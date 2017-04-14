@@ -80,30 +80,36 @@ RSpec.describe Cognito::Client::Command::CreateIdentitySearch do
     end
   end
 
-  context 'when name, phone, dob, ssn are provided' do
+  context 'when name, phone, dob, ssn, address are provided' do
     let(:request) do
       Cognito::Client::Request.post(
         '/identity_searches',
         data: {
           type:          'identity_search',
           attributes:    {
-            phone: {
+            phone:      {
               number: '+12223334444'
             },
-            name:  {
+            name:       {
               first:  'Delmer',
               middle: 'Loves',
               last:   'Pokemon'
             },
-            ssn:   {
+            ssn:        {
               area:   '123',
               group:  '45',
               serial: '6789'
             },
-            birth: {
+            birth:      {
               day:   23,
               month: 8,
               year:  1993
+            },
+            us_address: {
+              street:      '123 Main St',
+              city:        'Mountain View',
+              subdivision: 'CA',
+              postal_code: '94041'
             }
           },
           relationships: {
@@ -137,6 +143,12 @@ RSpec.describe Cognito::Client::Command::CreateIdentitySearch do
           day:   23,
           month: 8,
           year:  1993
+        },
+        us_address:   {
+          street:      '123 Main St',
+          city:        'Mountain View',
+          subdivision: 'CA',
+          postal_code: '94041'
         }
       )
 

@@ -15,7 +15,8 @@ class Cognito
             name:                       name,
             phone_number:               phone_number,
             ssn:                        ssn,
-            birth:                      birth
+            birth:                      birth,
+            us_address:                 us_address
           )
         end
 
