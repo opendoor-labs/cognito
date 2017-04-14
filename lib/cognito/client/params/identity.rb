@@ -4,7 +4,7 @@ class Cognito
   class Client
     class Params
       class Identity < self
-        include AbstractType, Anima.new(:name, :phone_number, :ssn, :birth)
+        include AbstractType, Anima.new(:name, :phone_number, :ssn, :birth, :us_address)
 
         abstract_method :relationships
 
@@ -32,10 +32,11 @@ class Cognito
 
         def full_attributes
           {
-            name:  name,
-            phone: phone,
-            ssn:   ssn,
-            birth: birth
+            name:       name,
+            phone:      phone,
+            ssn:        ssn,
+            birth:      birth,
+            us_address: us_address
           }
         end
 
