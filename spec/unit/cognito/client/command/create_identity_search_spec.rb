@@ -158,13 +158,15 @@ RSpec.describe Cognito::Client::Command::CreateIdentitySearch do
 
   context 'when request is ACCEPTED 202' do
     let(:headers) do
-      { 'Content-Location' => '/identity_searches/jobs/o3irufoai3o' }
+      { 'Content-Location' => location }
     end
+    let(:location) { '/identity_searches/jobs/o3irufoai3o' }
 
     it 'returns a processing identity response' do
       is_expected.to eql(
-        Cognito::Client::Response::IdentitySearchJob.build(http_response, connection)
+        Cognito::Client::Response::IdentitySearchJob.build(http_response, connection, location)
       )
+      expect(response.endpoint).to eql location
     end
   end
 

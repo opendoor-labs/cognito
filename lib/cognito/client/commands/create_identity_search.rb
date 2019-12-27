@@ -25,7 +25,7 @@ class Cognito
         def present_response
           case response.code
           when 202
-            Response::IdentitySearchJob.build(response, connection)
+            Response::IdentitySearchJob.build(response, connection, response['Content-Location'])
           when 201
             Response::IdentitySearch.build(response, connection)
           end
