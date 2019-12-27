@@ -3,11 +3,13 @@
 RSpec.describe Cognito::Client::Response::IdentitySearchJob do
   include_context 'response wrapper'
 
+  subject(:response) { described_class.build(http_response, connection, location) }
   let(:body)        { ''  }
+  let(:location)    { 'some_uri' }
   let(:status_code) { 202 }
 
   let(:headers) do
-    { 'Content-Location' => 'some_uri' }
+    { 'Content-Location' => location }
   end
 
   its(:processing?) { is_expected.to be(true) }

@@ -24,7 +24,7 @@ class Cognito
         end
 
         def processing_response
-          Response::IdentitySearchJob.build(response, connection)
+          Response::IdentitySearchJob.build(response, connection, endpoint)
         end
 
         def success?

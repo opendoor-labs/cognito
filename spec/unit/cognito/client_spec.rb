@@ -122,7 +122,7 @@ RSpec.describe Cognito::Client do
       allow(connection).to receive(:run).and_return(created_response)
 
       expect(client.create_identity_search(params)).to eql(
-        Cognito::Client::Response::IdentitySearchJob.build(created_response, connection)
+        Cognito::Client::Response::IdentitySearchJob.build(created_response, connection, endpoint)
       )
     end
 
