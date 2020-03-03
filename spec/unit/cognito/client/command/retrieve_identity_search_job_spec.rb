@@ -59,7 +59,7 @@ RSpec.describe Cognito::Client::Command::RetrieveIdentitySearchJob do
 
     it 'receives run with the correct params' do
       is_expected.to eql(
-        Cognito::Client::Response::IdentitySearchJob.build(http_response, connection)
+        Cognito::Client::Response::IdentitySearchJob.build(http_response, connection, location)
       )
 
       expect(connection).to have_received(:run).with(request)
@@ -67,10 +67,23 @@ RSpec.describe Cognito::Client::Command::RetrieveIdentitySearchJob do
 
     it 'returns a processing identity_search response' do
       is_expected.to eql(
-        Cognito::Client::Response::IdentitySearchJob.build(http_response, connection)
+        Cognito::Client::Response::IdentitySearchJob.build(http_response, connection, location)
       )
 
       expect(response.data.status).to eql('processing')
+      expect(response.endpoint).to eql location
+    end
+
+    context 'BUG: builds an IdentitySearchJob which expects a `Content-Location` header' do
+      it 'does not raise error for missing `Content-Location` header' do
+        is_expected.to eql(
+          Cognito::Client::Response::IdentitySearchJob.build(http_response, connection, location)
+        )
+        allow(Cognito::Client::Command::RetrieveIdentitySearchJob).to receive(:call)
+        expect do
+          response.get
+        end.to_not raise_error KeyError, /Content-Location/
+      end
     end
   end
 
