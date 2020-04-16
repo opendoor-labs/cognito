@@ -15,7 +15,7 @@ RSpec.describe Cognito::Client::Connection do
   let(:api_secret)  { 'Hal9000CanFeel'        }
   let(:api_version) { '2016-09-01'            }
 
-  its(:uri)         { is_expected.to eql(Addressable::URI.parse(uri_string)) }
+  its(:uri)         { is_expected.to eql(URI.parse(uri_string)) }
   its(:api_key)     { is_expected.to eql(api_key) }
   its(:api_secret)  { is_expected.to eql(api_secret) }
   its(:api_version) { is_expected.to eql(api_version) }

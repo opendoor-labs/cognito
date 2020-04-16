@@ -5,7 +5,7 @@ require 'procto'
 require 'adamantium'
 require 'abstract_type'
 require 'http'
-require 'addressable'
+require 'uri'
 require 'openssl'
 require 'base64'
 
