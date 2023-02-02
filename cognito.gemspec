@@ -29,6 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'procto', '~> 0.0.3'
   spec.add_dependency 'ice_nine', '~> 0.11.2'
 
-  spec.add_runtime_dependency 'http', '~> 2.0', '>= 2.0.3'
+  spec.add_runtime_dependency 'http', '~> 4.4', '>= 4.4.1'
   spec.add_runtime_dependency 'addressable', '~> 2.8'
 end
