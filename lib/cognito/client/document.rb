@@ -4,8 +4,13 @@ class Cognito
     class Document
       include Anima.new(:data, :included), Adamantium
 
-      def initialize(data:, included: [])
-        super
+      def initialize(args = {})
+        raise ArgumentError, 'data is required' unless args.key?(:data)
+
+        dup_args = args.dup
+        dup_args[:included] ||= []
+
+        super(dup_args)
       end
 
       def resolve(resource_object)

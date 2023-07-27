@@ -4,8 +4,10 @@ class Cognito
     class Connection
       include Anima.new(:uri, :api_key, :api_secret, :api_version)
 
-      def self.parse(uri:, **api_params)
-        new(uri: Addressable::URI.parse(uri), **api_params)
+      def self.parse(args)
+        args[:uri] ||= nil
+
+        new(**args.merge(uri: Addressable::URI.parse(args[:uri])))
       end
 
       # ignores :reek:FeatureEnvy:

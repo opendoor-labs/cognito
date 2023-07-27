@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 RSpec.describe Cognito::Client::Command::CreateIdentitySearch do
   include_context 'null connection'
 
@@ -24,7 +26,16 @@ RSpec.describe Cognito::Client::Command::CreateIdentitySearch do
                 id:   'oi13uaiof2qoi'
               }
             }
-          }
+          },
+           attributes: {
+            name: nil,
+            phone: {
+              number: nil
+            },
+            ssn: nil,
+            birth: nil,
+            us_address: nil
+          },
         }
       )
     end
@@ -42,16 +53,6 @@ RSpec.describe Cognito::Client::Command::CreateIdentitySearch do
         '/identity_searches',
         data: {
           type:          'identity_search',
-          attributes:    {
-            phone: {
-              number: '+12223334444'
-            },
-            name:  {
-              first:  'Delmer',
-              middle: 'Loves',
-              last:   'Pokemon'
-            }
-          },
           relationships: {
             profile: {
               data: {
@@ -59,7 +60,20 @@ RSpec.describe Cognito::Client::Command::CreateIdentitySearch do
                 id:   'oi13uaiof2qoi'
               }
             }
-          }
+          },
+          attributes: {
+            name:  {
+              first:  'Delmer',
+              middle: 'Loves',
+              last:   'Pokemon'
+            },
+            phone: {
+              number: '+12223334444'
+            },
+            ssn: nil,
+            birth: nil,
+            us_address: nil
+          },
         }
       )
     end

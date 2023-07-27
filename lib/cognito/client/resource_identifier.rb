@@ -5,8 +5,11 @@ class Cognito
     class ResourceIdentifier
       include Procto.call(:to_h), Anima.new(:id, :type, :attributes, :relationships)
 
-      def initialize(relationships: nil, **options)
-        super
+      def initialize(args = {})
+        dup_args = args.dup
+        dup_args[:relationships] ||= nil
+
+        super(dup_args)
       end
 
       def to_h

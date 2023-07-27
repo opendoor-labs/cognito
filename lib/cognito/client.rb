@@ -50,7 +50,7 @@ class Cognito
   class Client
     include Concord.new(:server)
 
-    def self.create(**connection_params)
+    def self.create(connection_params)
       new(Connection.parse(**connection_params))
     end
 
@@ -58,8 +58,8 @@ class Cognito
       Command::CreateProfile.call(server)
     end
 
-    def create_identity_search(**params)
-      Command::CreateIdentitySearch.call(params.merge(connection: server))
+    def create_identity_search(params)
+      Command::CreateIdentitySearch.call(**params.merge(connection: server))
     end
   end # Client
 end # Cognito

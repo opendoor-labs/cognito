@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 RSpec.describe Cognito::Client::Document do
   subject(:document) { described_class.new(response) }
 

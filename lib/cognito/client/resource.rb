@@ -61,8 +61,11 @@ class Cognito
         parent.included
       end
 
-      def initialize(relationships: nil, **options)
-        super
+      def initialize(args = {})
+        dup_args = args.dup
+        dup_args[:relationships] ||= nil
+
+        super dup_args
       end
 
       protected

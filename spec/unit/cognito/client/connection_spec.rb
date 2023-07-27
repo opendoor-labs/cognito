@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 RSpec.describe Cognito::Client::Connection do
   subject(:connection) do
     described_class.parse(

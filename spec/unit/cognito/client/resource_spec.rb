@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 RSpec.describe Cognito::Client::Resource do
   subject(:person) do
     Person.build(data.fetch(:data), Cognito::Client::Document.new(data))

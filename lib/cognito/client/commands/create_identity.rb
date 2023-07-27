@@ -14,8 +14,22 @@ class Cognito
 
         # ignores :reek:FeatureEnvy:, :reek:LongParameterList:
         # rubocop:disable ParameterLists, LineLength
-        def initialize(name: OMITTED, phone_number: OMITTED, ssn: OMITTED, birth: OMITTED, us_address: OMITTED, **params)
-          super(params.merge(name: name, phone_number: phone_number, ssn: ssn, birth: birth, us_address: us_address))
+        def initialize(args = {})
+          dup_args = args.dup
+          # dup_args[:name] ||= nil
+          # dup_args[:phone_number] ||= nil
+          # dup_args[:ssn] ||= nil
+          # dup_args[:birth] ||= nil
+          # dup_args[:us_address] ||= nil
+          super(
+            dup_args.merge(
+              name: dup_args[:name],
+              phone_number: dup_args[:phone_number],
+              ssn: dup_args[:ssn],
+              birth: dup_args[:birth],
+              us_address: dup_args[:us_address]
+            )
+          )
         end
         # rubocop:enable ParameterLists, LineLength
       end # CreateIdentity

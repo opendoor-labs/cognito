@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'cognito/client'
+
 RSpec.describe Cognito::Client do
-  subject(:create_client) { described_class.create(connection_params) }
+  subject(:create_client) { described_class.create(**connection_params) }
 
   let(:connection)  { Cognito::Client::Connection.parse(connection_params) }
   let(:uri)         { 'http://localhost:2001'                          }
@@ -105,7 +107,7 @@ RSpec.describe Cognito::Client do
     let(:data) do
       {
         data: {
-          type:          'identity_search',
+          type: 'identity_search',
           relationships: {
             profile: {
               data: {
@@ -113,6 +115,13 @@ RSpec.describe Cognito::Client do
                 id:   'oi13uaiof2qoi'
               }
             }
+          },
+          attributes: {
+            name:  nil,
+            phone: { number: nil },
+            ssn: nil,
+            birth: nil,
+            us_address: nil
           }
         }
       }

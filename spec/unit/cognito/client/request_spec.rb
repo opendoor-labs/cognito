@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 RSpec.describe Cognito::Client::Request do
   let(:api_key)    { 'sandbox_key_1234abcXYZ'        }
   let(:api_secret) { 'itsfullofstars'                }

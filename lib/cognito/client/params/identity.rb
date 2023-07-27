@@ -11,6 +11,7 @@ class Cognito
         def to_h
           relationship_params.tap do |params|
             params[:data][:attributes] = attributes unless attributes.empty?
+            params[:data][:attributes] = full_attributes
           end
         end
 

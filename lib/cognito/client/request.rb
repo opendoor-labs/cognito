@@ -26,7 +26,7 @@ class Cognito
       end
       private_class_method :build
 
-      def sign(**signature_params)
+      def sign(signature_params)
         with(headers: SigningHeaders.call(request: self, **signature_params))
       end
 

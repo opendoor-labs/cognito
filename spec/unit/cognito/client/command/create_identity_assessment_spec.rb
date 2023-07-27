@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 RSpec.describe Cognito::Client::Command::CreateIdentityAssessment do
   include_context 'null connection'
 
@@ -55,16 +57,19 @@ RSpec.describe Cognito::Client::Command::CreateIdentityAssessment do
       Cognito::Client::Request.post(
         '/identity_assessments',
         data: {
-          type:          'identity_assessment',
-          attributes:    {
-            name:  name,
-            phone: { number: phone_number }
-          },
+          type: 'identity_assessment',
           relationships: {
             identity_search: {
               data: identity_search_identifier
             }
-          }
+          },
+          attributes: {
+            name:  name,
+            phone: { number: phone_number },
+            ssn: nil,
+            birth: nil,
+            us_address: nil
+          },
         }
       )
     end
@@ -95,7 +100,14 @@ RSpec.describe Cognito::Client::Command::CreateIdentityAssessment do
             identity_search: {
               data: identity_search_identifier
             }
-          }
+          },
+          attributes: {
+            name:  nil,
+            phone: { number: nil },
+            ssn: nil,
+            birth: nil,
+            us_address: nil
+          },
         }
       )
     end
